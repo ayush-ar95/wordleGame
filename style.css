@@ -78,7 +78,7 @@ body {
 }
 
 dialog {
-    /* display: block; */
+    display: block;
     position: relative;
     padding: 10px;
     font-size: 1.45rem;
@@ -109,12 +109,12 @@ dialog {
     padding: 5px;
     font-size: 1.1rem;
     background-color: rgb(247, 247, 233);
-    text-align: center;
 }
 
 ::placeholder {
     color: black;
     opacity: .5;
+    text-align: center;
 }
 
 .input-button {
