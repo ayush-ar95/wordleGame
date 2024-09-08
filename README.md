@@ -17,7 +17,7 @@ The Wordle Game is a simple word puzzle game where player have to guess a hidden
 ## Screenshots
 
 ### mobile:
-![mobile landing page](screenshots/mobileLandingPage.png)
+![mobile landing page](screenshots/mobileLandingPage.png width=30%)
 ![mobile game page](screenshots/mobileGamePage.png)
 ![mobile win page](screenshots/mobileWinPage.png)
 ![mobile lose page](screenshots/mobileLosePage.png)
