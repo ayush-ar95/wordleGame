@@ -128,7 +128,7 @@ const checkWordGuessed = () => {
         playAgain.classList.add("show");
     }
     else {
-        showDialog("Guess again you are close 🥴, Green are correct letters at correct position, Yellow are correct letters at wrong position, Gray are incorrect letters.");
+        showDialog("Guess again you are close 🥴, Green are correct letters at correct position, Yellow are correct letters at wrong position, Red are incorrect letters.");
     }
 };
 
