@@ -16,6 +16,18 @@ The Wordle Game is a simple word puzzle game where player have to guess a hidden
 
 ## Screenshots
 
+### mobile:
+![mobile landing page](screenshots/mobileLandingPage.png)
+![mobile game page](screenshots/mobileGamePage.png)
+![mobile win page](screenshots/mobileWinPage.png)
+![mobile lose page](screenshots/mobileLosePage.png)
+![mobile check page](screenshots/mobileCheckPage.png)
+
+### web:
+![web landing page](screenshots/webLandingPage.png)
+![web landing page](screenshots/webGamePage.png)
+![web landing page](screenshots/webWinPage.png)
+
 
 ## Project Structure
 1. index.html: The main HTML file that contains the structure of the game.
