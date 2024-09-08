@@ -50,8 +50,6 @@ const words = [
     "faced", "mines", "marry", "juice", "raced", "waved", "goose", "trust", "fewer", "favor", "mills", "views",
     "joint", "eager", "spots", "blend", "rings", "adult", "index", "nails", "horns", "balls", "flame", "rates",
     "drill", "trace", "skins", "waxed", "seats", "stuff", "ratio", "minds", "silly", "coins", "hello", "trips"]
-console.log(words.length);
-
 // -------------------------------------------------------------------------------------------------------------------------------
 
 // selecting random words from words array.
@@ -62,67 +60,115 @@ const selectRandomWord = () => {
     return words[randomValue];
 };
 
-const randomWord = selectRandomWord();
+// const randomWord = selectRandomWord();
+const randomWord ="blood";
 console.log(randomWord);
 // -----------------------------------------
 
 const inputButton = document.querySelector(".input-button");
 const userInputBox = document.querySelector(".user-input");
 const buttonRow = document.querySelectorAll(".row");
+const dialogBox = document.querySelector(".dialog-block");
+
 let userInput = null;
 let letterRow;
-let currentButton;
-
 let turn = 0;
 
 // -------------------------------- 
 
 inputButton.addEventListener("click", () => {
-    userInput = userInputBox.value;
-    showValue(userInput);
+    gameMethod();
+    userInputBox.value = ""; // clear the content of input box.
 });
 
 // -----------------
 
-const showValue = (userInput) => {
+const gameMethod = () => {
     if (turn <= 5) {
-        letterRow = buttonRow[turn].querySelectorAll(".letter-button");
-        letterRow.forEach((letter, index) => {
-            currentButton=letter;
-            letter.textContent = userInput[index];
-            checkPosition(letter.textContent, index); // checking the position simultaneously.
-        });
-        turn++;
+        userInput = userInputBox.value;
+        if (userInput.length === 5) {
+            showValue(userInput);
+            checkWordGuessed();
+        }
+        else {
+            // show dialog stating enter 5 letter word only.
+            showDialog("Enter a 5 letter word only.");
+        }
+    }
+    if (turn === 6 && (randomWord !== userInput)) {
+        showDialog("you coudn't guess the word");
+        inputButton.disabled = true;
+    }
+};
+
+//--------------------
+const checkWordGuessed = () => {
+    if (randomWord === userInput.toLowerCase()) {
+        showDialog("You guessed the word right");
+        inputButton.disabled = true;
     }
     else {
-        // loosing condition 
-        console.log("you loose");
+        showDialog("guess again you are close");
     }
+};
+
+// -------------------
+const showDialog = (sentence) => {
+    const pElement = dialogBox.querySelector("p");
+    pElement.textContent = sentence;
+};
+
+// ------------------
+
+const showValue = (userInput) => {
+    letterRow = buttonRow[turn].querySelectorAll(".letter-button");
+    letterRow.forEach((letter, index) => {
+        letter.textContent = userInput[index];  // displaying the letter to the correseponding button.
+        checkPosition(letter.textContent.toLowerCase(), index); // checking the position simultaneously.
+    });
+    turn++;
 };
 
 const checkPosition = (letter, index) => {
     let foundElement = false;
-    for (let i = 0; i < 5; i++) {    
-
+    for (let i = 0; i < 5; i++) {
         if (randomWord[i] === letter) {
             // we found the letter matching with random word.
             foundElement = true;
             if (i === index) {
-                // position is also same
+                // position is also same.
                 // change color to green.
-                
-                console.log("element found at correct position", index);
+                letterRow[index].style.background = "green";
+                letterRow[index].style.color = "white";
             }
             else {
-                // change color to yellow
-                console.log("element found but at incorrect positon", index);
+                // element found but postion is not same.
+                // change color to yellow.
+                letterRow[index].style.background = "gold";
+                letterRow[index].style.color = "white";
             }
         }
     }
     if (!foundElement) {
-        // Element not found 
-        console.log("element not found");
-
+        // Element not found. 
+        // change color to red.
+        letterRow[index].style.background = "red";
+        letterRow[index].style.color = "white";
     }
 };
 
+
+// const word = 'blood'
+// const userWord = 'bolod'
+// const usrWord = userWord.split('')
+// usrWord.forEach((item,index)=>{
+//     if(item===word[index]){
+//         console.log('i am green color')
+//     }else{
+//         if(word.split('').includes(item)){
+//             console.log('i am yellow')
+//         }else{
+//             console.log('i am red')
+//         }
+//     }
+// })
