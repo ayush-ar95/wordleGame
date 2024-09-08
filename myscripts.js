@@ -49,7 +49,7 @@ const words = [
     "prize", "stove", "tubes", "acres", "wound", "steep", "slide", "trunk", "error", "porch", "slave", "exist",
     "faced", "mines", "marry", "juice", "raced", "waved", "goose", "trust", "fewer", "favor", "mills", "views",
     "joint", "eager", "spots", "blend", "rings", "adult", "index", "nails", "horns", "balls", "flame", "rates",
-    "drill", "trace", "skins", "waxed", "seats", "stuff", "ratio", "minds", "silly", "coins", "hello", "trips"]
+    "drill", "trace", "skins", "waxed", "seats", "stuff", "ratio", "minds", "silly", "coins", "hello", "trips"];
 // -------------------------------------------------------------------------------------------------------------------------------
 
 // selecting random words from words array.
@@ -60,15 +60,16 @@ const selectRandomWord = () => {
     return words[randomValue];
 };
 
-// const randomWord = selectRandomWord();
-const randomWord ="blood";
+let randomWord = selectRandomWord();
 console.log(randomWord);
 // -----------------------------------------
 
-const inputButton = document.querySelector(".input-button");
-const userInputBox = document.querySelector(".user-input");
 const buttonRow = document.querySelectorAll(".row");
 const dialogBox = document.querySelector(".dialog-block");
+const userInputBox = document.querySelector(".user-input");
+const inputButton = document.querySelector(".input-button");
+const playAgain = document.querySelector(".reset-button");
+const allInputButton = document.querySelectorAll(".letter-button");
 
 let userInput = null;
 let letterRow;
@@ -79,6 +80,21 @@ let turn = 0;
 inputButton.addEventListener("click", () => {
     gameMethod();
     userInputBox.value = ""; // clear the content of input box.
+});
+
+playAgain.addEventListener("click", () => {
+    showDialog("Guess 😪 a five letter word !");
+    userInput = null;
+    turn = 0;
+    randomWord = selectRandomWord();
+    console.log(randomWord);
+    allInputButton.forEach(button => {
+        button.textContent = "";
+        button.style.background = "";
+    });
+    userInputBox.classList.remove("hide");
+    inputButton.classList.remove("hide");
+    playAgain.classList.remove("show");
 });
 
 // -----------------
@@ -92,23 +108,27 @@ const gameMethod = () => {
         }
         else {
             // show dialog stating enter 5 letter word only.
-            showDialog("Enter a 5 letter word only.");
+            showDialog("Enter a 5 letter word only 🙄.");
         }
     }
     if (turn === 6 && (randomWord !== userInput)) {
-        showDialog("you coudn't guess the word");
-        inputButton.disabled = true;
+        showDialog("you coudn't guess the word 😵‍💫, play agian !");
+        userInputBox.classList.add("hide");
+        inputButton.classList.add("hide");
+        playAgain.classList.add("show");
     }
 };
 
 //--------------------
 const checkWordGuessed = () => {
     if (randomWord === userInput.toLowerCase()) {
-        showDialog("You guessed the word right");
-        inputButton.disabled = true;
+        showDialog("You nailed it ! 🎉");
+        userInputBox.classList.add("hide");
+        inputButton.classList.add("hide");
+        playAgain.classList.add("show");
     }
     else {
-        showDialog("guess again you are close");
+        showDialog("Guess again you are close 🥴, Green are correct letters at correct position, Yellow are correct letters at wrong position, Gray are incorrect letters.");
     }
 };
 
@@ -124,51 +144,23 @@ const showValue = (userInput) => {
     letterRow = buttonRow[turn].querySelectorAll(".letter-button");
     letterRow.forEach((letter, index) => {
         letter.textContent = userInput[index];  // displaying the letter to the correseponding button.
-        checkPosition(letter.textContent.toLowerCase(), index); // checking the position simultaneously.
+        checkPosition(userInput[index].toLowerCase(), index); // checking the position simultaneously.
     });
     turn++;
 };
+//---------------------- 
 
 const checkPosition = (letter, index) => {
-    let foundElement = false;
-    for (let i = 0; i < 5; i++) {
-        if (randomWord[i] === letter) {
-            // we found the letter matching with random word.
-            foundElement = true;
-            if (i === index) {
-                // position is also same.
-                // change color to green.
-                letterRow[index].style.background = "green";
-                letterRow[index].style.color = "white";
-            }
-            else {
-                // element found but postion is not same.
-                // change color to yellow.
-                letterRow[index].style.background = "gold";
-                letterRow[index].style.color = "white";
-            }
+    if (randomWord[index] === letter) {
+        // user and randomword letter matches and are at same index.
+        letterRow[index].style.background = "MediumSpringGreen";
+    } else {
+        if (randomWord.includes(letter)) {
+            // user and randomword letter matches but are not at same index.
+            letterRow[index].style.background = "gold";
+        } else {
+            // any other cases.
+            letterRow[index].style.background = "Salmon";
         }
     }
-    if (!foundElement) {
-        // Element not found. 
-        // change color to red.
-        letterRow[index].style.background = "red";
-        letterRow[index].style.color = "white";
-    }
 };
-
-
-// const word = 'blood'
-// const userWord = 'bolod'
-// const usrWord = userWord.split('')
-// usrWord.forEach((item,index)=>{
-//     if(item===word[index]){
-//         console.log('i am green color')
-//     }else{
-//         if(word.split('').includes(item)){
-//             console.log('i am yellow')
-//         }else{
-//             console.log('i am red')
-//         }
-//     }
-// })

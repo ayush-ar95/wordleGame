@@ -7,7 +7,7 @@ body {
     background-color: teal;
     /* border: 1px solid orange; */
     height: 100vh;
-    min-height: 700px;
+    min-height: 800px;
 }
 
 .game-board {
@@ -17,8 +17,7 @@ body {
     align-items: center;
     /* border: 1px red solid; */
     height: 98vh;
-    min-height: 700px;
-    ;
+    min-height: 770px;
 }
 
 .game-board h1 {
@@ -29,20 +28,6 @@ body {
     color: PaleTurquoise;
     letter-spacing: 1.5px;
 }
-
-/* .rule-block {
-    border: 1px solid blue;
-    padding: 10px;
-    margin: 5px;
-    height: 15vh;
-
-    ol {
-        padding: 10px;
-        display: flex;
-        flex-direction: column;
-    }
-} */
-
 
 .game-block {
     display: flex;
@@ -75,7 +60,7 @@ body {
     border-radius: 5px;
     border: none;
     background-color: rgb(247, 247, 233);
-    color:firebrick;
+    color: black;
 }
 
 dialog {
@@ -86,13 +71,16 @@ dialog {
     background: none;
     color: wheat;
     border: none;
-    margin: 10px;
+    margin: 5px;
     text-align: center;
+    width: 40vh;
+    min-width: 270px;
+    /* border: 1px solid black; */
 }
 
 .input-block {
     margin: 5px;
-    /* border: 1px solid orange; */
+    border: px solid pink;
     padding: 10px;
     display: flex;
     flex-direction: row;
@@ -127,8 +115,27 @@ dialog {
     font-weight: 600;
     background-color: sandybrown;
     min-width: 14vh;
+    outline: none;
+}
+
+.reset-button {
+    margin-left: 5px;
+    border-radius: 5px;
+    border: none;
+    font-size: 1rem;
+    font-weight: 600;
+    min-width: 16vh;
+    background-color:tomato;
+    color:wheat;
+    padding: 10px 15px;
+    display: none;
+    outline: none;
 }
 
 .show {
     display: block;
+}
+
+.hide {
+    display: none;
 }
