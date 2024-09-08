@@ -35,6 +35,6 @@ The Wordle Game is a simple word puzzle game where player have to guess a hidden
 3. myscript.js: The JavaScript file that contains the game logic.
 
 ## How to Run
-To run the Wordle Game locally,
-    1. Clone the repository.
-    2. Open index.html in a web browser.
+To run the Wordle Game locally
+1. Clone the repository.
+2. Open index.html in a web browser.
