@@ -50,8 +50,7 @@ const words = [
     "faced", "mines", "marry", "juice", "raced", "waved", "goose", "trust", "fewer", "favor", "mills", "views",
     "joint", "eager", "spots", "blend", "rings", "adult", "index", "nails", "horns", "balls", "flame", "rates",
     "drill", "trace", "skins", "waxed", "seats", "stuff", "ratio", "minds", "silly", "coins", "hello", "trips"];
-// -------------------------------------------------------------------------------------------------------------------------------
-
+// -------------------------------------------------
 // selecting random words from words array.
 
 const selectRandomWord = () => {
@@ -63,6 +62,7 @@ const selectRandomWord = () => {
 let randomWord = selectRandomWord();
 console.log(randomWord);
 // -----------------------------------------
+// Global Variables
 
 const buttonRow = document.querySelectorAll(".row");
 const dialogBox = document.querySelector(".dialog-block");
@@ -73,9 +73,10 @@ const allInputButton = document.querySelectorAll(".letter-button");
 
 let userInput = null;
 let letterRow;
-let turn = 0;
+let turn = 0;   // used to check number of turns in each game.
 
 // -------------------------------- 
+// added event listeners on two buttons.
 
 inputButton.addEventListener("click", () => {
     gameMethod();
@@ -83,17 +84,21 @@ inputButton.addEventListener("click", () => {
 });
 
 playAgain.addEventListener("click", () => {
+    // reinitializing all default variables
     showDialog("Guess 😪 a five letter word !");
     userInput = null;
     turn = 0;
-    randomWord = selectRandomWord();
+    randomWord = selectRandomWord();    // selecting random word again for next game.
     console.log(randomWord);
+    // removing background color and letters from all the buttons.
     allInputButton.forEach(button => {
         button.textContent = "";
         button.style.background = "";
     });
+    // hiding input box and submit button.
     userInputBox.classList.remove("hide");
     inputButton.classList.remove("hide");
+    // showing play again button.
     playAgain.classList.remove("show");
 });
 
@@ -102,17 +107,17 @@ playAgain.addEventListener("click", () => {
 const gameMethod = () => {
     if (turn <= 5) {
         userInput = userInputBox.value;
-        if (userInput.length === 5) {
-            showValue(userInput);
-            checkWordGuessed();
+        if (userInput.length === 5) {   // it checks the enter word is 5 letter or not.
+            showValue(userInput);   // it will display the word in boxes.
+            checkWordGuessed(); // it will check weather the user enter the guessed word or not.
         }
         else {
             // show dialog stating enter 5 letter word only.
             showDialog("Enter a 5 letter word only 🙄.");
         }
     }
-    if (turn === 6 && (randomWord !== userInput)) {
-        showDialog("you coudn't guess the word 😵‍💫, play agian !");
+    if (turn === 6 && (randomWord !== userInput)) { // game over condition 
+        showDialog(`you couldn't guess the word - "${randomWord}" 😵‍💫, play agian !`);
         userInputBox.classList.add("hide");
         inputButton.classList.add("hide");
         playAgain.classList.add("show");
@@ -121,8 +126,9 @@ const gameMethod = () => {
 
 //--------------------
 const checkWordGuessed = () => {
-    if (randomWord === userInput.toLowerCase()) {
+    if (randomWord === userInput.toLowerCase()) {   // winning condition.
         showDialog("You nailed it ! 🎉");
+        // display and hide buttons
         userInputBox.classList.add("hide");
         inputButton.classList.add("hide");
         playAgain.classList.add("show");
@@ -146,7 +152,7 @@ const showValue = (userInput) => {
         letter.textContent = userInput[index];  // displaying the letter to the correseponding button.
         checkPosition(userInput[index].toLowerCase(), index); // checking the position simultaneously.
     });
-    turn++;
+    turn++; // increase the number of turns each time user word is displayed.
 };
 //---------------------- 
 
